@@ -3,11 +3,15 @@
 StorageDevice = mmcblk0
 # StorageDevice = vdb
 
-Start_config_partition = 409600 # starts at 200MiB
-End_config_partition = 31866880 # ends at 15GiB
+Start_config_partition = 409600 
+# starts at 200MiB
+End_config_partition = 31866880 
+# ends at 15GiB
 
-Start_home = 31867904 # begins roughly at 15GiB
-End_home = ""	      # uses last sector by inputting a newline for automatic selection
+Start_home = 31867904 
+# begins roughly at 15GiB
+End_home = ""	      
+# uses last sector by inputting a newline for automatic selectionA
 
 create_partition() {
    start_sector = $1
@@ -44,7 +48,8 @@ mkfs.ext4 -O ^has_journal,^64bit -L LBU    /dev/"$StorageDevice"2
 mkfs.ext4 -O ^has_journal,^64bit -L HOME   /dev/"$StorageDevice"3
 
 echo "/dev/disk/by-label/LBU    /media/       ext4 noatime,ro 0 0" >> /etc/fstab
-echo "/dev/disk/by-label/HOME   /home/        ext4 noatime,ro 0 0" >> /etc/fstab # home directory on first boot does not have data, safe to mount
+echo "/dev/disk/by-label/HOME   /home/        ext4 noatime,ro 0 0" >> /etc/fstab 
+# home directory on first boot does not have data, safe to mount
 
 mount -a
 
