@@ -1,23 +1,23 @@
 #!/bin/sh
 
-StorageDevice = mmcblk0
-# StorageDevice = vdb
+StorageDevice=mmcblk0
+# StorageDevice=vdb
 
-Start_config_partition = 409600 
+Start_config_partition=409600 
 # starts at 200MiB
-End_config_partition = 31866880 
+End_config_partition=31866880 
 # ends at 15GiB
 
-Start_home = 31867904 
+Start_home=31867904 
 # begins roughly at 15GiB
-End_home = ""	      
+End_home=""	      
 # uses last sector by inputting a newline for automatic selectionA
 
 create_partition() {
-   start_sector = $1
-   end_sector   = $2
-   number       = $3
-   device       = $4
+   start_sector=$1
+   end_sector=$2
+   number=$3
+   device=$4
    fdisk /dev/$device << EOF
    n
    p
@@ -28,10 +28,10 @@ EOF
 }
 
 setup_wifi() {
-   FileLocation = $1
-   SSID         = $2
-   Password     = $3
-   FileContent  = $(wpa_passphrase $SSID $Password)
+   FileLocation=$1
+   SSID=$2
+   Password=$3
+   FileContent=$(wpa_passphrase $SSID $Password)
    cat << EOF >   $FileLocation
    $FileContent
 EOF
